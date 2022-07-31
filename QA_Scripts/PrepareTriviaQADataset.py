@@ -97,9 +97,6 @@ def preprocess_function_single_answer(examples):
 
     	inputs['question_lengths'] = question_lengths
 
-    	#print("inputs['question_lengths']")
-    	#print(inputs['question_lengths'])
-
     ############################################################
 
     if model_choice in ["google/t5-large-lm-adapt", 't5-base', 't5-small', 'google/t5-v1_1-small']:
@@ -247,10 +244,6 @@ model_choice = "microsoft/deberta-v2-xlarge"
 #model_choice = "bert-base-uncased"
 #model_choice = 'bert-large-uncased'
 #model_choice = "microsoft/deberta-v2-xlarge"
-#model_choice = 't5-base'
-#model_choice = 't5-small'
-#model_choice = 'csarron/bert-base-uncased-squad-v1'
-#model_choice = 'google/t5-v1_1-small'
 
 tokenizer = AutoTokenizer.from_pretrained(model_choice)#.to(device)
 
@@ -258,26 +251,16 @@ context_cutoff_count = 1024
 context_token_count = 512
 
 multi_answer = False
-
 remove_missing_answers = False
-
 reduced_sample = False
-
 only_preprocess_questions = False
 
 chosen_dataset = "trivia_qa"
-#chosen_dataset = "squad"
 
 #################################################################
 
 if chosen_dataset == "trivia_qa":
 	current_dataset = load_dataset(chosen_dataset, 'rc')#.to(device)
-elif chosen_dataset == "natural_questions":
-	current_dataset = load_dataset(chosen_dataset)#.to(device)
-elif chosen_dataset == "squad_v2":
-	current_dataset = load_dataset(chosen_dataset)#.to(device)
-elif chosen_dataset == "squad":
-	current_dataset = load_dataset(chosen_dataset)#.to(device)
 
 save_path = "./" + chosen_dataset + "_dataset_" + model_choice + "_" + str(context_cutoff_count) + "_" + str(context_token_count)
 save_path += "_" + str(multi_answer) + "_" + str(remove_missing_answers) + "_" + str(reduced_sample)# + "_" + str(only_preprocess_questions)
@@ -292,8 +275,6 @@ print(len(current_dataset['validation']))
 
 if chosen_dataset == "trivia_qa":
 	current_dataset = current_dataset.map(reformat_trivia_qa, batched=True)
-elif chosen_dataset == "natural_questions":
-	current_dataset = current_dataset.map(reformat_NQ, batched=True)
 
 ####################################################################
 
@@ -320,19 +301,6 @@ print(type(current_dataset['test']))
 
 ####################################################################
 
-if reduced_sample == True:
-
-	print("-----------------------------------------------------")
-	print("Generate reduced sample")
-
-	current_dataset['train'] = current_dataset['train'].train_test_split(test_size=0.05)['test']
-	current_dataset['validation'] = current_dataset['validation']
-	current_dataset['test'] = current_dataset['test']
-
-	print("-----------------------------------------------------")
-
-####################################################################
-
 print("---------------------------------------------------------------------")
 print("Before: " + str(len(current_dataset['train'])))
 print("Before: " + str(len(current_dataset['validation'])))
@@ -348,12 +316,6 @@ print("---------------------------------------------------------------------")
 ####################################################################
 
 if chosen_dataset == "trivia_qa":
-	current_dataset = current_dataset.map(preprocess_function_single_answer, batched=True, remove_columns=current_dataset["train"].column_names)
-elif chosen_dataset == "natural_questions":
-	current_dataset = current_dataset.map(preprocess_function_single_answer_NQ, batched=True, remove_columns=current_dataset["train"].column_names)
-elif chosen_dataset == "squad_v2":
-	current_dataset = current_dataset.map(preprocess_function_single_answer_SQuADv2, batched=True, remove_columns=current_dataset["train"].column_names)
-elif chosen_dataset == "squad":
 	current_dataset = current_dataset.map(preprocess_function_single_answer, batched=True, remove_columns=current_dataset["train"].column_names)
 
 ####################################################################
