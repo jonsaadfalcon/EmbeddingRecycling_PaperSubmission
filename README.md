@@ -19,7 +19,7 @@ conda activate embedding_recycling
 
 ## Experiment Replication
 
-# Standard Embedding Recycling
+### Standard Embedding Recycling
 
 To replicate our results for standard embedding recycling, use the conda environment listed above and run the following scripts for each dataset group:
 
@@ -29,7 +29,7 @@ To replicate our results for standard embedding recycling, use the conda environ
 
 The hyperparameters for replicating each experiment are included in the `HyperparameterSelection` folder. 
 
-# Adapter-Based Embedding Recycling
+### Adapter-Based Embedding Recycling
 
 To replicate our results for adapter-based embedding recycling, use the conda environment listed above and run the following scripts for each dataset group:
 
