@@ -1,6 +1,4 @@
 # Embedding Recycling
-Preprint on ArXiv: [Embedding Recycling for Language Models](https://arxiv.org/abs/2207.04993)
-
 ## Datasets
 
 To access our datasets using for text classification, please go to the folder titled `text_classification`. 
