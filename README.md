@@ -35,6 +35,6 @@ To replicate our results for adapter-based embedding recycling, use the conda en
 
 - For text classification, use the `TextClassificationScripts/Adapters_PaperResults.py` script
 - For NER, use the `NER_Scripts/Adapters_NER_PaperResults.py` script
-- For QA, use the `QA_Scripts/Adapters_QA_PaperResults.py` script to replicate the TriviaQA results. For SQuAD, please use the "run_squad.py" script included on the [HuggingFace Transformers repository](https://github.com/huggingface/transformers/blob/main/examples/legacy/question-answering/run_squad.py), which we also include in our main directory.
+- For QA, use the `QA_Scripts/Adapters_QA_PaperResults.py` script to replicate the TriviaQA results. For TriviaQA, use the `QA_Scripts/PrepareTriviaQADataset.py` for preprocessing the TriviaQA dataset using the selected model. For SQuAD, please use the "run_squad.py" script included on the [HuggingFace Transformers repository](https://github.com/huggingface/transformers/blob/main/examples/legacy/question-answering/run_squad.py), which we also include in our main directory.
 
 The hyperparameters for replicating each experiment are included in the `HyperparameterSelection` folder. 
